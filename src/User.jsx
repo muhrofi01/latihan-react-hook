@@ -22,6 +22,9 @@ const User = (props) => {
 
     useEffect(() => {
         getUsers();
+        // saat render awal false namun render kedua jadi true
+        console.log(Array.isArray(data));
+        // saat render awal null namun saat render kedua jadi ada isi datanya
         console.log(data);
     }, []);
     
