@@ -36,17 +36,22 @@ const User = (props) => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                {data && data.map((item) => (
-                    <TableRow
-                    key={item.id}
-                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                    >
-                        <TableCell component="th" scope="row">
-                            {item.title}
-                        </TableCell>
-                        <TableCell>{item.body}</TableCell>
-                    </TableRow>
-                ))}
+                {data && data.map((item) => {
+                        if(item.id <= 5) {
+                            return (
+                                <TableRow
+                                key={item.id}
+                                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                >
+                                    <TableCell component="th" scope="row">
+                                        {item.title}
+                                    </TableCell>
+                                    <TableCell>{item.body}</TableCell>
+                                </TableRow>
+                            );
+                        }
+                    })
+                }
                 </TableBody>
             </Table>
         </TableContainer>

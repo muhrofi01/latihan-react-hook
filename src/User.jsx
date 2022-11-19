@@ -18,11 +18,11 @@ const User = (props) => {
         } catch (error) {
             console.log(error);
         }
-        
     }
 
     useEffect(() => {
         getUsers();
+        console.log(data);
     }, []);
     
     return (
@@ -38,20 +38,25 @@ const User = (props) => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                {data && data.map((item) => (
-                    <TableRow
-                    key={item.id}
-                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                    >
-                        <TableCell component="th" scope="row">
-                            {item.name}
-                        </TableCell>
-                        <TableCell>{item.username}</TableCell>
-                        <TableCell>{item.email}</TableCell>
-                        <TableCell>{item.address.street}</TableCell>
-                        <TableCell>{item.company.name}</TableCell>
-                    </TableRow>
-                ))}
+                {data && data.map((item) => {
+                        if(item.id <= 5) {
+                            return (
+                            <TableRow
+                            key={item.id}
+                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                            >
+                                <TableCell component="th" scope="row">
+                                    {item.name}
+                                </TableCell>
+                                <TableCell>{item.username}</TableCell>
+                                <TableCell>{item.email}</TableCell>
+                                <TableCell>{item.address.street}</TableCell>
+                                <TableCell>{item.company.name}</TableCell>
+                            </TableRow>
+                            );
+                        }
+                    })
+                }
                 </TableBody>
             </Table>
         </TableContainer>
