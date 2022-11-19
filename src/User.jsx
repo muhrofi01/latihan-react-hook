@@ -12,9 +12,9 @@ const User = (props) => {
 
     const getUsers = async() => {
         try {
-            await fetch("https://jsonplaceholder.typicode.com" + props.urlEnd)
-                    .then((res) => res.json())
-                    .then((data) => setData(data));
+            const response = await fetch("https://jsonplaceholder.typicode.com" + props.urlEnd)
+            const data = await response.json();
+            setData(data);
         } catch (error) {
             console.log(error);
         }
