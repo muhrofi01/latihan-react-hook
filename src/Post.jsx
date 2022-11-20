@@ -19,7 +19,7 @@ const User = (props) => {
         try {
             const response = await fetch("https://jsonplaceholder.typicode.com" + props.urlEnd)
             const data = await response.json();
-            setData(data);
+            setData(data.splice(0, 5));
         } catch (error) {
             console.log(error);
         }
@@ -27,7 +27,7 @@ const User = (props) => {
     }
     
     return (
-        <TableContainer component={Paper}>
+        <TableContainer component={Paper} sx={{ marginTop: 5 }}>
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
                 <TableHead>
                     <TableRow>
@@ -36,21 +36,17 @@ const User = (props) => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                {data && data.map((item) => {
-                        if(item.id <= 5) {
-                            return (
-                                <TableRow
-                                key={item.id}
-                                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                                >
-                                    <TableCell component="th" scope="row">
-                                        {item.title}
-                                    </TableCell>
-                                    <TableCell>{item.body}</TableCell>
-                                </TableRow>
-                            );
-                        }
-                    })
+                {data && data.map((item) => (
+                        <TableRow
+                        key={item.id}
+                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                        >
+                            <TableCell component="th" scope="row">
+                                {item.title}
+                            </TableCell>
+                            <TableCell>{item.body}</TableCell>
+                        </TableRow>
+                    ))
                 }
                 </TableBody>
             </Table>

@@ -14,7 +14,7 @@ const User = (props) => {
         try {
             const response = await fetch("https://jsonplaceholder.typicode.com" + props.urlEnd)
             const data = await response.json();
-            setData(data);
+            setData(data.splice(0, 5));
         } catch (error) {
             console.log(error);
         }
@@ -29,21 +29,19 @@ const User = (props) => {
     }, []);
     
     return (
-        <TableContainer component={Paper}>
-            <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                <TableHead>
-                    <TableRow>
-                        <TableCell align="center">Name</TableCell>
-                        <TableCell align="center">Username</TableCell>
-                        <TableCell align="center">Email</TableCell>
-                        <TableCell align="center">Address</TableCell>
-                        <TableCell align="center">Company Name</TableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                {data && data.map((item) => {
-                        if(item.id <= 5) {
-                            return (
+            <TableContainer component={Paper} sx={{ marginTop: 5 }}>
+                <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                    <TableHead>
+                        <TableRow>
+                            <TableCell align="center">Name</TableCell>
+                            <TableCell align="center">Username</TableCell>
+                            <TableCell align="center">Email</TableCell>
+                            <TableCell align="center">Address</TableCell>
+                            <TableCell align="center">Company Name</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                    {data && data.map((item) => (
                             <TableRow
                             key={item.id}
                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -56,13 +54,11 @@ const User = (props) => {
                                 <TableCell>{item.address.street}</TableCell>
                                 <TableCell>{item.company.name}</TableCell>
                             </TableRow>
-                            );
-                        }
-                    })
-                }
-                </TableBody>
-            </Table>
-        </TableContainer>
+                        ))
+                    }
+                    </TableBody>
+                </Table>
+            </TableContainer>
     );
 }
 
