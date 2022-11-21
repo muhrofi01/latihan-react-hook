@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -6,29 +5,10 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import useFetch from "./useFetch";
 
 const User = (props) => {
-  const [data, setData] = useState(null);
-
-  const getUsers = async () => {
-    try {
-      const response = await fetch(
-        "https://jsonplaceholder.typicode.com" + props.urlEnd
-      );
-      const data = await response.json();
-      setData(data.splice(0, 5));
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    getUsers();
-    // saat render awal false namun render kedua jadi true
-    console.log(Array.isArray(data));
-    // saat render awal null namun saat render kedua jadi ada isi datanya
-    console.log(data);
-  }, []);
+  const [data] = useFetch(props.urlEnd);
 
   return (
     <TableContainer component={Paper} sx={{ marginTop: 5 }}>
