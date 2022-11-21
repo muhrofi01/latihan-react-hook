@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 const useFetch = (url) => {
   const [data, setData] = useState(null);
 
-  const getData = async (url) => {
+  const getData = async () => {
     try {
       const response = await fetch(
         "https://jsonplaceholder.typicode.com" + url
@@ -17,7 +17,7 @@ const useFetch = (url) => {
 
   useEffect(() => {
     getData();
-  }, [url]);
+  }, []);
 
   return [data];
 };
